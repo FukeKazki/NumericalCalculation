@@ -9,8 +9,8 @@ int main(void) {
     int n;
     double a[N][N+1], x[N];
 
+    printf("上三角型連立1次方程式の解法\n");
     while (1) {
-        printf("上三角型連立1次方程式の開放\n");
         printf("未知数の個数 n を入力してください。 (1 < n < 7) n = ");
         scanf("%d%*c", &n);
         if (n <= 1 || n >= 7) {
