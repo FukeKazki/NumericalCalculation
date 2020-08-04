@@ -67,6 +67,7 @@ int main(void) {
     debugMatrix(a, n);
 
     REP(i, n) {
+        printf("==== iループ: %d ====\n", i);
         if (i != n-1) {
             replace(a, i, n);
         }
@@ -80,14 +81,18 @@ int main(void) {
         REP(j, n+1) {
             a[i][j] /= p;
         }
-
+        printf("対角成分を1にする。\n");
+        debugMatrix(a, n);
         REP(k, n) {
+            printf("\t ==== kループ: %d ====\n", k);
             // 同じ行なら飛ばす
             if (i == k) continue;
-
+            printf("\t 上下に弾き出し\n");
             double q = a[k][i];
+            printf("\t q = %lf\n",q);
             FOR(j, n+1, i) {
-                a[k][j] = a[k][j] - a[i][j] * q;
+                a[k][j] -= a[i][j] * q;
+                debugMatrix(a, n);
             }
         }
 

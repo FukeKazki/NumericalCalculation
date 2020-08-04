@@ -95,7 +95,7 @@ int main(void) {
 
             double q = a[k][i];
             FOR(j, n*2, i) {
-                a[k][j] = a[k][j] - a[i][j] * q;
+                a[k][j] -= a[i][j] * q;
             }
         }
 

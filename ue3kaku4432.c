@@ -14,7 +14,6 @@ int main(void) {
         printf("未知数の個数 n を入力してください。 (1 < n < 7) n = ");
         scanf("%d%*c", &n);
         if (n <= 1 || n >= 7) {
-            printf("Error\n");
             continue;
         }
         printf("係数と右辺の値を入力してください\n");
@@ -35,8 +34,21 @@ int main(void) {
         if (z == 'y') break;
     }
 
+    /*
+    * 1  -2  3  0.5
+    * 0   1 -1  0.1
+    * 0   0  1 -1.1
+    */
+    printf("行列\n");
+    REP(i, n) {
+        REP(j, n+1) {
+            printf("%.2lf  ", a[i][j]);
+        }
+        printf("\n");
+    }
     REP(i, n) {
         double p = a[i][i];
+        // fabs: 浮動小数点の絶対値
         if (fabs(p) < 1.0e-6) {
             printf("一意解をもちません\n");
             return 0;
@@ -45,14 +57,16 @@ int main(void) {
             a[i][j] /= p;
         }
     }
-
-    REPR(i, n-1) {
-        double s;
-        s = 0.0;
-        FOR(j, n, i+1) {
+    // 逆進代入
+    REPR(i, n-1) { // 初期値 n - 1
+        double s = 0.0;
+        printf("%d行目です。\n", i);
+        FOR(j, n, i+1) { // 初期値 i + 1
+            printf("s += %lf * %lf\n", a[i][j], x[j]);
             s += a[i][j] * x[j];
         }
         x[i] = a[i][n] - s;
+        printf("%lf - %lf = %lf\n", a[i][n], s, x[i]);
     }
 
     printf("上三角型連立1次方程式の解\n");
